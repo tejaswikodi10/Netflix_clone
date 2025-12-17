@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Clone</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .header {
+      height: 100vh;
+      width: 100%;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.75),
+          rgba(0, 0, 0, 0.75)),
+        url("https://i.pinimg.com/1200x/49/d6/8f/49d68fc983b66770f629ff9dad146d04.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 50px;
+    }
+
+    .logo {
+      width: 150px;
+    }
+
+    .signin-btn {
+      background-color: #e50914;
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .hero-text h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+    }
+
+    .hero-text h2 {
+      margin: 15px 0;
+      font-size: 1.8rem;
+      font-weight: 400;
+    }
+
+    .hero-text p {
+      margin-top: 10px;
+      font-size: 1.2rem;
+    }
+
+    .email-box {
+      margin-top: 20px;
+    }
+
+    .email-box input {
+      padding: 15px;
+      width: 350px;
+      border: none;
+      border-radius: 4px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .email-box button {
+      padding: 15px 20px;
+      background-color: #e50914;
+      color: #fff;
+      border: none;
+      font-size: 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    .movie-row {
+      padding: 40px 50px;
+    }
+
+    .movie-row h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .movie-list {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+    }
+
+    .movie-item {
+      min-width: 150px;
+      height: 225px;
+      background-color: #333;
+      border-radius: 8px;
+      flex: 0 0 auto;
+    }
+
+    .features {
+      padding: 60px 50px;
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .features-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: linear-gradient(to bottom, #1a243a, #301934);
+      padding: 25px;
+      border-radius: 15px;
+      flex: 1 1 calc(25% - 20px);
+      min-width: 220px;
+      color: #fff;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .trending {
+      border-radius: 15px;
+      padding: 50px 60px;
+      background-color: #000;
+      cursor: pointer;
+    }
+
+    .trending h2 {
+      text-align: center;
+      padding: 25px;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .trending-row {
+      display: flex;
+      gap: 25px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 10px;
+    }
+
+    .trending-row::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .trending-row::-webkit-scrollbar-thumb {
+      background: #555;
+      border-radius: 10px;
+    }
+
+    .movie {
+      display: flex;
+      position: relative;
+      min-width: 200px;
+      align-items: center;
+    }
+
+    .movie img {
+      width: 180px;
+      
+    }
+
+    .movie:hover {
+      transform: scale(1.12);
+    }
+
+    .rank {
+      position: absolute;
+      bottom: 15px;
+      left: -0.1px;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color:white;
+      text-shadow:
+        -3px -3px 0 #000,
+        3px -3px 0 #000,
+        -3px 3px 0 #000,
+        3px 3px 0 #000;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <nav>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" class="logo">
+      <button class="signin-btn">Sign In</button>
+    </nav>
+
+    <div class="hero-text">
+      <h1>Unlimited movies, TV shows and more.</h1>
+      <h2>Starts at ₹149. Cancel anytime.</h2>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+
+      <div class="email-box">
+        <input type="email" placeholder="Email address">
+        <button>Get Started ></button>
+      </div>
+    </div>
+  </div>
+  <section class="trending">
+    <h2>Trending Now</h2>
+
+    <div class="trending-row">
+
+      <div class="movie">
+        <span class="rank">1</span>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5X8xeDuwiEk5na0wjYrTuIbrdBiJkwc2Lig&s"
+          alt="Stranger Things">
+      </div>
+
+      <div class="movie">
+        <span class="rank">2</span>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNweFFJV-ThLNSMnG2e7x8azUXO2z941bUxQ&s"
+          alt="Dude">
+      </div>
+
+      <div class="movie">
+        <span class="rank">3</span>
+        <img
+          src="https://m.media-amazon.com/images/M/MV5BOTlkNmI4OTktZjU4Ny00ZjNlLWJkNmMtOTU4NmU2MTcwNTkwXkEyXkFqcGc@._V1_QL75_UY281_CR18,0,190,281_.jpg"
+          alt="Single Papa">
+      </div>
+
+      <div class="movie">
+        <span class="rank">4</span>
+        <img
+          src="https://cdn.district.in/movies-assets/images/cinema/kaantha1%20(1)-cbc3c900-bf9a-11f0-8cda-4b1791c81b52.jpg"
+          alt="kaantha">
+      </div>
+
+
+      <div class="movie">
+        <span class="rank">5</span>
+        <img
+          src="https://m.media-amazon.com/images/M/MV5BNTEwY2I1NjYtY2ZkMC00YjhhLWFhNWItOTA3NDkyODE5MjcxXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+          alt="Jolly LLB 3">
+      </div>
+
+      <div class="movie">
+        <span class="rank">6</span>
+        <img
+          src="https://cdn.district.in/movies-assets/images/cinema/The-Girlfriend_Poster-05bb43c0-b97b-11f0-afc6-dda5a2a769ff.jpg"
+          alt="The Girlfriend">
+      </div>
+
+      <div class="movie">
+        <span class="rank">7</span>
+        <img
+          src="https://dnm.nflximg.net/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABaT6eyLSlUt_JVCE3EJeEIXBIQKYxrXlCNlp7XojPL0vqro4dR-e_Xzp1x7JCjPeAG4qxeOM0fFmce5IAEqaIs-4Jwj-cGzSgzXK.jpg?r=184"
+          alt="delhi crime">
+      </div>
+
+      <div class="movie">
+        <span class="rank">8</span>
+        <img
+          src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/idli-kottu-et00463853-1759209448.jpg"
+          alt="idli kottu">
+      </div>
+
+      <div class="movie">
+        <span class="rank">9</span>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1a/Sunny_Sanskari_Ki_Tulsi_Kumari_film_poster.jpg/250px-Sunny_Sanskari_Ki_Tulsi_Kumari_film_poster.jpg"
+          alt="sunny sanskari ki tulsi kumari">
+      </div>
+
+      <div class="movie">
+        <span class="rank">10</span>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuoj2snZQqDyK2YLvjHqMGNSAAmkm-16LeBg&s"
+          alt="bison">
+      </div>
+
+    </div>
+  </section>
+
+  <section class="features">
+    <h2> More reasons to join </h2>
+    <div class="features-container">
+      <div class="feature-card">
+        <h3>Enjoy on your TV</h3>
+        <p>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Download your shows to watch offline</h3>
+        <p>Save your favourites easily and always have something to watch.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Watch everywhere</h3>
+        <p>Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Create profiles for kids</h3>
+        <p>Send kids on adventures with their favourite characters in a space made just for them — free with your membership.</p>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
